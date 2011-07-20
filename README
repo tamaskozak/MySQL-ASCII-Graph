@@ -1,0 +1,43 @@
+MySQL ASCII Graph 
+
+Graphical pager for MySQL that let you easily visualize data 
+straight from the database. 
+
+Screenshot: http://img585.imageshack.us/img585/3448/mysqlasciigraph2.png
+
+For usage see the examples below
+
+
+
+Examples:
+# mysql -p
+mysql> \P /root/mysqlasciigraph.php
+mysql> select value as y from test order by id desc limit 500;
+   [You should see the output of the graph]
+
+mysql> select value as y, id as x from test order by id desc limit 500;
+   [You should see the output of the graph]
+
+
+Reversing graph values, useful when data comes in reversed order and 
+you do not want to use ORDER BY 
+
+mysql> \P /root/mysqlasciigraph.php reverse 
+mysql> select value as y from test order by id desc limit 500;
+   [You should see the output of the graph]
+
+OR specify an extra column "reverse"
+
+mysql> select value as y, 'yes' as reverse from test order by id desc limit 500;
+   [You should see the output of the graph]
+
+
+If you select values for X axis as well and there are gaps in your 
+data set, you will see gaps on the graph as well
+mysql> select value as y, id as x from test where (id > 300 or id < 100) and id < 500;
+   [You should see the output of the graph]
+
+Dealing with datetime/timestamp fields on the X axis
+mysql> \P /root/mysqlasciigraph.php date reverse
+mysql> select value as y, runtimestamp as x from test where (id > 300 or id < 100) and id < 500;
+   [You should see the output of the graph]
